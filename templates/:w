@@ -1,0 +1,83 @@
+$def with (page)
+
+<html>
+    <head>
+        <title> PAPA USER</title>
+        <meta http-equiv="Content-Type" content="text/html;charset=utf-8">
+        <script src="http://ajax.aspnetcdn.com/ajax/jQuery/jquery-1.8.2.min.js" type="text/javascript"></script>
+        <script src="/static/jquery.fancybox.pack.js"></script>
+        <script type="text/javascript">
+            //jQuery(function(){
+            //    jQuery("a[rel=group]").fancybox({
+            //        'titlePosition':'over',
+            //        'cyclic': true,
+            //        'titleFormat':function(title,currentIndex,currentOpts){                 return '<span id="fancybox-title-over">'+(currentIndex+1)+(title.length ? '&nbsp;' + title: '') + '</span>'
+            //        }
+            //    })
+            //})
+        </script>
+        <link href="/static/jquery.fancybox.css" rel="stylesheet">
+        <style>
+            #pbl{position:relative}
+            body{background:#EEEEEE;}
+            header{
+                text-align:center;
+                height:50px;
+                background:#E5E5E5;
+            }
+            a.fav-btn:link,a.fav-btn:visited{
+                color:#FFF6EE;
+                border-color:#F2ECE7;
+                color:#99776B;
+                text-decoration:none;
+            }
+            a{
+
+                text-decoration:none;
+            }
+            .fav-btn{
+                border:1px solid #EDCEBA;
+                border-radius:3px;
+                display:inline-block;
+                height:19px;
+                margin-left:15px;
+                overflow: hidden;
+                padding:0 8px 0 19px;
+                vertical-align:middle;
+            }
+            .fav-cancel,.fav-cancel:link,.fav-cancel:hover{
+                background:url("/static/ic_like.png")no-repeat scroll 4px -17px  transparent;
+            }
+            .fav-add,.fav-add:link,.fav-add:hover{
+                background:url('/static/ic_like.png') no-repeat scroll 4444px 3px
+                transparent;
+            }
+            #loading{
+                background: none repeat scroll 0 0 #000000;
+                bottom: 0;
+                color: #FFFFFF;
+                display: none;
+                height:30px;
+                line-height:30px;
+                opacity: 0.8;
+                position: fixed;
+                text-align:center;
+                width: 100%;
+            }
+            #container{
+                position: relative;
+                margin: 20px auto 0;
+                width:1000px;
+            }
+            li{
+                position:absolute;padding:10px;border:1px solid
+                #ccc;text-align:
+                center;top:0;left:0;background:#FFFFFF;list-style:none; }
+        h3{padding-top:5px;}
+            img{width:300px;height: auto; display:block; border:0}
+        </style>
+    </head>
+    <body>
+        $:page
+    </body>
+<html>

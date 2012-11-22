@@ -1,0 +1,111 @@
+$def with (users)
+<header>
+papa
+</header>
+<div id="container">
+    <ul id="pbl">
+        $for user in users:
+        <li id="$user.id"><a class="fancybox-button" data-fancybox-type="iframe" title="$user.signature" href="$(user.background)640/640" rel="gallery"><img src="$(user.avatar)300/640" ></a><h3>$(user.name)</h3><a class="fav-btn fav-add" data-id="$user.id" >LIKES</a></li>
+
+    </ul>
+    <div id="loading" > 正在加載......</div>
+</div>
+<script>
+    jQuery(function(){
+        jQuery(".fancybox-button").fancybox({
+            maxWidth: 640,
+            maxHeight: 640,
+            fitToView : false,
+            width: 500,
+            height:500,
+            autoSize: false,
+            closClick: true,
+            opentEffect:"none",
+            closeEffect : "none",
+            closeBtn: true,
+            helpers:{
+                title:{type:'float'},
+                buttons: {}
+            }
+        });
+        jQuery(".fav-btn").live('click',function(){
+            var self = jQuery(this);
+            var hasFav = self.hasClass('fav-cancel') ? 1 : 0;
+            var paras = {id: self.attr('data-id')}
+            //jQuery.get('/like',paras,function(o){
+            //    console.log(o.r)
+            //},"json")
+            jQuery.ajax({
+                type: hasFav ? 'delete':'get',
+                url:'/like',
+                data: paras,
+                success: function(o){
+                    console.log(o.r);
+                    //alert(JSON.parse(data.o));
+                    if(o.r == 0){
+                        if(hasFav){
+                            self.removeClass('fav-cancel').addClass('fav-add');
+                            console.log('d');
+                        }else{
+                            self.removeClass('fav-add').addClass('fav-cancel');
+                            console.log('e');
+                        }
+                    }
+                },
+                dataType:"JSON"
+            });
+        });
+    });
+</script>
+<script>
+    function pubu(){
+        var margin = 10;
+        var li = jQuery("li");
+        var li_W = li[0].offsetWidth + margin;
+        var h = [];
+        var n = document.documentElement.offsetWidth/li_W|0;
+        for(var i = 0; i < li.length; i++ ){
+            li_H = li[i].offsetHeight;
+            if(i < n ){
+                h[i] = li_H;
+                li.eq(i).css("top",0);
+                li.eq(i).css("left",i*li_W);
+            }else{
+                min_H = Math.min.apply(null, h);
+                minKey = getarraykey(h,min_H);
+                h[minKey] += li_H + margin;
+                li.eq(i).css("top",min_H + margin);
+                li.eq(i).css("left",minKey * li_W);
+            }
+        }
+    }
+function getarraykey(s,v){for(k in s) if(s[k]==v){return k;}}
+//window.onload= function(){pubu()}
+pubu()
+//jQuery(document).ready(function())
+window.onresize = function(){pubu();}
+//*****************************************/
+var j = 1;
+function getMore(i){
+    jQuery("#loading").show();
+    jQuery.get('/test?p='+ i,function(data){
+       // console.log(JSON.stringify(data))
+        for(var m=0;m < data.length; m++){
+            console.log(m);
+            var url = data[m].avatar;
+            console.log(url);
+            var html = "<li style='opacity:1' id="+data[m].id+" ><a class='fancybox-button' rel='gallery' data-fancybox-type='iframe' title="+ data[m].signature+"href=" + data[m].background +"600/600><img src="+url+"300/640></a><h3>"+data[m].name+"</h3><a class='fav-btn fav-add' data-id="+data[m].id+">LIKES</a></li>";
+            jQuery("#pbl").append(html);
+            jQuery("#loading").hide();
+        }
+        pubu();
+        j = 1;
+    },"JSON")
+}
+jQuery(window).bind("scroll",function(){
+    var i = jQuery("li").length + 1; if(jQuery(document).scrollTop() + jQuery(window).height() > jQuery(document).height() - 800 && j == 1){ console.log('ee')
+        j = 0;
+        getMore(i);
+    }
+});
+</script>
