@@ -94,7 +94,7 @@ function getMore(i){
             console.log(m);
             var url = data[m].avatar;
             console.log(url);
-            var html = "<li style='opacity:1' id="+data[m].id+" ><a class='fancybox-button' rel='gallery' data-fancybox-type='iframe' title="+ data[m].signature+"href=" + data[m].background +"600/600><img src="+url+"300/640></a><h3>"+data[m].name+"</h3><a class='fav-btn fav-add' data-id="+data[m].id+">LIKES</a></li>";
+            var html = "<li style='opacity:1' id="+data[m].id+" ><a class='fancybox-button' rel='gallery' data-fancybox-type='iframe' title="+ data[m].signature+" href=" + data[m].background +"600/600><img src="+url+"300/640></a><h3>"+data[m].name+"</h3><a class='fav-btn fav-add' data-id="+data[m].id+">LIKES</a></li>";
             jQuery("#pbl").append(html);
             jQuery("#loading").hide();
         }
