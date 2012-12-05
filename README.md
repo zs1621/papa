@@ -1,8 +1,7 @@
-papa
-====
+papa ====
 
 papa user show
-DEMO 地址: [http://ppuser.sinaapp.com](http://ppuser.sinaapp.com) unspport IE
+DEMO 地址: [http://ppuser.sinaapp.com](http://ppuser.sinaapp.com) 
 ================================
 
 1 `papa.py`  retrive the papa user data ,and save to mysql
